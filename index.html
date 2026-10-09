@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A modern, responsive Tic Tac Toe game built with vanilla HTML, CSS, and JavaScript." />
+  <title>TIC TAC TOE | Modern Web Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts for sleek typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="background-decorations" aria-hidden="true">
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+  </div>
+
+  <main class="app-container">
+    <!-- Header -->
+    <header class="game-header">
+      <h1 class="game-title">TIC <span class="gradient-text">TAC</span> TOE</h1>
+      <p class="game-subtitle">Classic duel • Cyber-Modern Edition</p>
+    </header>
+
+    <!-- Turn Banner & Status -->
+    <section class="status-panel" aria-live="polite">
+      <div class="turn-indicator" id="turnIndicator">
+        <span class="turn-label">Current Turn:</span>
+        <span class="badge player-x-badge" id="turnBadge">
+          <span class="badge-icon">✕</span> Player X
+        </span>
+      </div>
+    </section>
+
+    <!-- Scoreboard -->
+    <section class="scoreboard" aria-label="Scoreboard">
+      <div class="score-card player-x-card">
+        <div class="score-header">
+          <span class="player-symbol">✕</span>
+          <span class="player-name">Player X</span>
+        </div>
+        <div class="score-value" id="scoreX">0</div>
+      </div>
+
+      <div class="score-card ties-card">
+        <div class="score-header">
+          <span class="player-symbol">🤝</span>
+          <span class="player-name">Ties / Draws</span>
+        </div>
+        <div class="score-value" id="scoreTies">0</div>
+      </div>
+
+      <div class="score-card player-o-card">
+        <div class="score-header">
+          <span class="player-symbol">◯</span>
+          <span class="player-name">Player O</span>
+        </div>
+        <div class="score-value" id="scoreO">0</div>
+      </div>
+    </section>
+
+    <!-- 3x3 Game Board -->
+    <section class="board-wrapper">
+      <div class="game-board" id="gameBoard" role="grid" aria-label="Tic Tac Toe Board">
+        <!-- 9 Grid Cells generated with accessible ARIA tags -->
+        <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1, Empty" tabindex="0"></button>
+        <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2, Empty" tabindex="0"></button>
+        <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3, Empty" tabindex="0"></button>
+        <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4, Empty" tabindex="0"></button>
+        <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5, Empty" tabindex="0"></button>
+        <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6, Empty" tabindex="0"></button>
+        <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7, Empty" tabindex="0"></button>
+        <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8, Empty" tabindex="0"></button>
+        <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9, Empty" tabindex="0"></button>
+      </div>
+    </section>
+
+    <!-- Control Buttons -->
+    <section class="controls-panel">
+      <button class="btn btn-primary" id="newRoundBtn">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+        </svg>
+        New Round
+      </button>
+
+      <button class="btn btn-secondary" id="resetScoreBtn">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+        </svg>
+        Reset Scores
+      </button>
+
+      <button class="btn btn-ghost" id="soundToggleBtn" aria-label="Toggle Sound Effects" title="Toggle Sound">
+        <span id="soundIcon">🔊</span>
+      </button>
+    </section>
+  </main>
+
+  <!-- Winner / Draw Announcement Modal -->
+  <div class="modal-overlay" id="resultModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-sparkle" aria-hidden="true">✨</div>
+      <h2 class="modal-title" id="modalTitle">Winner!</h2>
+      <p class="modal-message" id="modalMessage">Player X takes the round!</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-large" id="modalPlayAgainBtn">Play Next Round</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
